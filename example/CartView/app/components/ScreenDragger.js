@@ -15,7 +15,7 @@ import CartHeader from './CartHeader'
 import Screen2 from './Screen2'
 import Screen3 from './Screen3'
 
-import Drawer from '../custom/index'
+import Drawer from 'react-native-draggable-view'
 export default class ScreenDragger extends Component {
     render() {
         return (
