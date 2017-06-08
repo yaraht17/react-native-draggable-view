@@ -1,11 +1,11 @@
-#react-native-draggable-drawer
+#react-native-draggable-view
 
 DraggableView is a component for react-native, it allows you have a vertical draggable view that you can drag up or drag down. So, if you drag and release that component, then it keeps moving until reach  either initial position or container border.  
 
 ## Example
-### [draggable-view-sample](https://github.com/llanox/react-native-draggable-drawer/blob/master/examples/draggabledrawer-image-bouncing/DemoScreen.js)
+### [draggable-view-sample](https://github.com/yaraht17/react-native-draggable-view/tree/master/example/CartView)
 
-![react-native-draggable-view](http://i.imgur.com/AequjyD.gif)
+![react-native-draggable-view](http://gph.is/2r902Hx)
 
 ### Installation
 
