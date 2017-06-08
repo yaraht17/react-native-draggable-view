@@ -5,7 +5,7 @@ DraggableView is a component for react-native, it allows you have a vertical dra
 ## Example
 ### [draggable-view-sample](https://github.com/yaraht17/react-native-draggable-view/tree/master/example/CartView)
 
-![react-native-draggable-view](http://gph.is/2r902Hx)
+![react-native-draggable-view](https://media.giphy.com/media/BA1ucRPKMNM9q/giphy.gif)
 
 ### Installation
 
