@@ -14,7 +14,6 @@ import {
     PanResponder,
     Dimensions, TouchableOpacity
 } from 'react-native';
-import Screen2 from '../components/Screen2'
 var SCREEN_HEIGHT = Dimensions.get('window').height;
 var DraggableDrawerHelper = require('./helper')(SCREEN_HEIGHT);
 
