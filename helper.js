@@ -45,7 +45,7 @@ module.exports = function (screen_height ) {
 
 
    module.startAnimation = function (velocityY, positionY,initialPositon,id ){
-      console.log('creating animation ');
+      // console.log('creating animation ');
       var isGoingToUp = ( velocityY < 0 )? true : false;
       var speed = Math.abs(velocityY);
       var currentPosition = Math.abs(positionY / screen_height);
@@ -54,7 +54,7 @@ module.exports = function (screen_height ) {
       var position = new Animated.Value(positionY);
       position.removeAllListeners();
 
-      console.log('configuration : '+endPosition)
+      // console.log('configuration : '+endPosition)
 
       Animated.timing(position, {
          toValue: endPosition,
@@ -64,7 +64,7 @@ module.exports = function (screen_height ) {
          velocity: velocityY
       }).start();
 
-      position.addListener((position)=>{console.log('position by',position,endPosition);});
+      // position.addListener((position)=>{console.log('position by',position,endPosition);});
       position.addListener(this.callbackPositionUpdated);
    };
 
