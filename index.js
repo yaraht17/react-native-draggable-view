@@ -23,11 +23,13 @@ class component extends Component {
     // naming it initialX clearly indicates that the only purpose
     // of the passed down prop is to initialize something internally
     var initialDrawerSize = DraggableDrawerHelper.calculateInitialPosition(this.props.initialDrawerSize);
+    var finalDrawerSize = this.props.finalDrawerHeight;
     // console.log(initialDrawerSize, 'Initila size');
     this.state = {
       touched: 'FALSE',
       position: new Animated.Value(initialDrawerSize),
-      initialPositon: initialDrawerSize
+      initialPositon: initialDrawerSize,
+      finalPosition: finalDrawerSize,
     };
   }
 
@@ -80,7 +82,7 @@ class component extends Component {
   moveFinished (gestureState) {
     var isGoingToUp = (gestureState.vy < 0);
     if (!this.center) return;
-    DraggableDrawerHelper.startAnimation(gestureState.vy, gestureState.moveY, this.state.initialPositon, gestureState.stateId);
+    DraggableDrawerHelper.startAnimation(gestureState.vy, gestureState.moveY, this.state.initialPositon, gestureState.stateId, this.state.finalPosition);
     this.props.onRelease && this.props.onRelease(isGoingToUp);
   }
 

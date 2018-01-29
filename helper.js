@@ -44,12 +44,12 @@ module.exports = function (screen_height ) {
    };
 
 
-   module.startAnimation = function (velocityY, positionY,initialPositon,id ){
+   module.startAnimation = function (velocityY, positionY,initialPositon,id,finalPosition){
       // console.log('creating animation ');
       var isGoingToUp = ( velocityY < 0 )? true : false;
       var speed = Math.abs(velocityY);
       var currentPosition = Math.abs(positionY / screen_height);
-      var endPosition = isGoingToUp? 0 : initialPositon;
+      var endPosition = isGoingToUp? finalPosition : initialPositon;
 
       var position = new Animated.Value(positionY);
       position.removeAllListeners();
