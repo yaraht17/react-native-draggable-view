@@ -34,6 +34,8 @@ class component extends Component {
   }
 
   onUpdatePosition (position) {
+    // console.log('UPDATE_POSITION', position);
+    position = position -50;
     this.state.position.setValue(position);
     this._previousTop = position;
     // console.log('Position ', position);
@@ -68,7 +70,7 @@ class component extends Component {
 
 
   moveDrawerView (gestureState) {
-    // console.log(gestureState.vy, 'GESTURE');
+    // console.log('GESTURE', gestureState);
     if (!this.center) return;
     var currentValue = Math.abs(gestureState.moveY / SCREEN_HEIGHT);
     var isGoingToUp = (gestureState.vy < 0);
@@ -100,7 +102,8 @@ class component extends Component {
           {containerView}
         </View>
         <Animated.View
-          style={[drawerPosition, styles.drawer]}
+          style={[drawerPosition, styles.drawer,
+            {backgroundColor: this.props.drawerBg ? this.props.drawerBg : 'transparent' }]}
           ref={(center) => this.center = center}
           {...this._panGesture.panHandlers}>
           <TouchableWithoutFeedback
@@ -124,7 +127,6 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   drawer: {
-    backgroundColor: 'white',
     flex: 1,
   },
   container: {

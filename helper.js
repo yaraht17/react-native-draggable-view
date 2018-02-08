@@ -49,7 +49,7 @@ module.exports = function (screen_height ) {
       var isGoingToUp = ( velocityY < 0 )? true : false;
       var speed = Math.abs(velocityY);
       var currentPosition = Math.abs(positionY / screen_height);
-      var endPosition = isGoingToUp? finalPosition : initialPositon;
+      var endPosition = isGoingToUp? finalPosition+50 : initialPositon+50;
 
       var position = new Animated.Value(positionY);
       position.removeAllListeners();
@@ -59,8 +59,8 @@ module.exports = function (screen_height ) {
       Animated.timing(position, {
          toValue: endPosition,
          tension: 30,
-         friction: 1,
-         //easing:Easing.elastic,
+         friction: 0,
+         // easing:Easing.elastic,
          velocity: velocityY
       }).start();
 
