@@ -23,7 +23,7 @@ class component extends Component {
     // naming it initialX clearly indicates that the only purpose
     // of the passed down prop is to initialize something internally
     var initialDrawerSize = DraggableDrawerHelper.calculateInitialPosition(this.props.initialDrawerSize);
-    var finalDrawerSize = this.props.finalDrawerHeight;
+    var finalDrawerSize = this.props.finalDrawerHeight ? this.props.finalDrawerHeight : 0;
     // console.log(initialDrawerSize, 'Initila size');
     this.state = {
       touched: 'FALSE',
@@ -103,7 +103,7 @@ class component extends Component {
         </View>
         <Animated.View
           style={[drawerPosition, styles.drawer,
-            {backgroundColor: this.props.drawerBg ? this.props.drawerBg : 'transparent' }]}
+            {backgroundColor: this.props.drawerBg ? this.props.drawerBg : 'white' }]}
           ref={(center) => this.center = center}
           {...this._panGesture.panHandlers}>
           <TouchableWithoutFeedback
