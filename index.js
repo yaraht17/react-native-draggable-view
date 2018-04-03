@@ -23,15 +23,19 @@ class component extends Component {
     // naming it initialX clearly indicates that the only purpose
     // of the passed down prop is to initialize something internally
     var initialDrawerSize = DraggableDrawerHelper.calculateInitialPosition(this.props.initialDrawerSize);
+    var finalDrawerSize = this.props.finalDrawerHeight ? this.props.finalDrawerHeight : 0;
     // console.log(initialDrawerSize, 'Initila size');
     this.state = {
       touched: 'FALSE',
       position: new Animated.Value(initialDrawerSize),
-      initialPositon: initialDrawerSize
+      initialPositon: initialDrawerSize,
+      finalPosition: finalDrawerSize,
     };
   }
 
   onUpdatePosition (position) {
+    // console.log('UPDATE_POSITION', position);
+    position = position -50;
     this.state.position.setValue(position);
     this._previousTop = position;
     // console.log('Position ', position);
@@ -66,7 +70,7 @@ class component extends Component {
 
 
   moveDrawerView (gestureState) {
-    // console.log(gestureState.vy, 'GESTURE');
+    // console.log('GESTURE', gestureState);
     if (!this.center) return;
     var currentValue = Math.abs(gestureState.moveY / SCREEN_HEIGHT);
     var isGoingToUp = (gestureState.vy < 0);
@@ -80,7 +84,7 @@ class component extends Component {
   moveFinished (gestureState) {
     var isGoingToUp = (gestureState.vy < 0);
     if (!this.center) return;
-    DraggableDrawerHelper.startAnimation(gestureState.vy, gestureState.moveY, this.state.initialPositon, gestureState.stateId);
+    DraggableDrawerHelper.startAnimation(gestureState.vy, gestureState.moveY, this.state.initialPositon, gestureState.stateId, this.state.finalPosition);
     this.props.onRelease && this.props.onRelease(isGoingToUp);
   }
 
@@ -98,7 +102,8 @@ class component extends Component {
           {containerView}
         </View>
         <Animated.View
-          style={[drawerPosition, styles.drawer]}
+          style={[drawerPosition, styles.drawer,
+            {backgroundColor: this.props.drawerBg ? this.props.drawerBg : 'white' }]}
           ref={(center) => this.center = center}
           {...this._panGesture.panHandlers}>
           <TouchableWithoutFeedback
@@ -122,7 +127,6 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   drawer: {
-    backgroundColor: 'white',
     flex: 1,
   },
   container: {
