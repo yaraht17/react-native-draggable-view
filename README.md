@@ -29,6 +29,7 @@ $ npm i react-native-draggable-view --save
                     <StatusBar hidden={true} />
                     <CartHeader /> //view you can draggable
                 </View>)}
+            />
     
 ```
 
