@@ -14,15 +14,16 @@ import {
   PanResponder,
   Dimensions, TouchableOpacity
 } from 'react-native';
-var SCREEN_HEIGHT = Dimensions.get('window').height;
-var DraggableDrawerHelper = require('./helper')(SCREEN_HEIGHT);
-
-class component extends Component {
-  constructor (props) {
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+export default class component extends Component {
+  constructor(props) {
     super(props)
     // naming it initialX clearly indicates that the only purpose
     // of the passed down prop is to initialize something internally
-    var initialDrawerSize = DraggableDrawerHelper.calculateInitialPosition(this.props.initialDrawerSize);
+    const initialUsedSpace = Math.abs(this.props.initialDrawerSize);
+    const initialDrawerSize = (SCREEN_HEIGHT * (1 - initialUsedSpace));
+
+
     var finalDrawerSize = this.props.finalDrawerHeight ? this.props.finalDrawerHeight : 0;
     // console.log(initialDrawerSize, 'Initila size');
     this.state = {
@@ -30,34 +31,60 @@ class component extends Component {
       position: new Animated.Value(initialDrawerSize),
       initialPositon: initialDrawerSize,
       finalPosition: finalDrawerSize,
+      initialUsedSpace: initialUsedSpace,
     };
   }
 
-  onUpdatePosition (position) {
+
+  isAValidMovement = (distanceX, distanceY) => {
+    const moveTravelledFarEnough = Math.abs(distanceY) > Math.abs(distanceX) && Math.abs(distanceY) > 2;
+    return moveTravelledFarEnough;
+  }
+
+
+  startAnimation = (velocityY, positionY, initialPositon, id, finalPosition) => {
+    // console.log('creating animation ');
+    var isGoingToUp = (velocityY < 0) ? true : false;
+    var speed = Math.abs(velocityY);
+    var currentPosition = Math.abs(positionY / SCREEN_HEIGHT);
+    var endPosition = isGoingToUp ? finalPosition + 50 : initialPositon + 50;
+
+    var position = new Animated.Value(positionY);
+    position.removeAllListeners();
+
+    // console.log('configuration : '+endPosition)
+    Animated.timing(position, {
+      toValue: endPosition,
+      tension: 30,
+      friction: 0,
+      // easing:Easing.elastic,
+      velocity: velocityY
+    }).start();
+
+    // position.addListener((position) => { console.log('position by', position, endPosition); });
+    position.addListener((position) => {
+      if (!this.center) return;
+      this.onUpdatePosition(position.value);
+    });
+  }
+
+  onUpdatePosition(position) {
     // console.log('UPDATE_POSITION', position);
-    position = position -50;
+    position = position - 50;
     this.state.position.setValue(position);
     this._previousTop = position;
     // console.log('Position ', position);
-    var initialPosition = DraggableDrawerHelper.getInitialPosition();
+    const { initialPosition } = this.state
 
     if (initialPosition === position) {
       this.props.onInitialPositionReached && this.props.onInitialPositionReached();
     }
   }
 
-  componentWillMount () {
-    // Initialize the DraggableDrawerHelper that will drive animations
-    DraggableDrawerHelper.setupAnimation(TENSION, FRICTION,
-      (position) => {
-        if (!this.center) return;
-        this.onUpdatePosition(position.value);
-      }
-    );
-
+  componentWillMount() {
     this._panGesture = PanResponder.create({
       onMoveShouldSetPanResponder: (evt, gestureState) => {
-        return DraggableDrawerHelper.isAValidMovement(gestureState.dx, gestureState.dy) && this.state.touched == 'TRUE';
+        return this.isAValidMovement(gestureState.dx, gestureState.dy) && this.state.touched == 'TRUE';
       },
       onPanResponderMove: (evt, gestureState) => {
         this.moveDrawerView(gestureState);
@@ -69,7 +96,7 @@ class component extends Component {
   }
 
 
-  moveDrawerView (gestureState) {
+  moveDrawerView(gestureState) {
     // console.log('GESTURE', gestureState);
     if (!this.center) return;
     var currentValue = Math.abs(gestureState.moveY / SCREEN_HEIGHT);
@@ -81,10 +108,10 @@ class component extends Component {
     this.onUpdatePosition(position);
   }
 
-  moveFinished (gestureState) {
+  moveFinished(gestureState) {
     var isGoingToUp = (gestureState.vy < 0);
     if (!this.center) return;
-    DraggableDrawerHelper.startAnimation(gestureState.vy, gestureState.moveY, this.state.initialPositon, gestureState.stateId, this.state.finalPosition);
+    this.startAnimation(gestureState.vy, gestureState.moveY, this.state.initialPositon, gestureState.stateId, this.state.finalPosition);
     this.props.onRelease && this.props.onRelease(isGoingToUp);
   }
 
@@ -103,20 +130,25 @@ class component extends Component {
         </View>
         <Animated.View
           style={[drawerPosition, styles.drawer,
-            {backgroundColor: this.props.drawerBg ? this.props.drawerBg : 'white' }]}
+            { backgroundColor: this.props.drawerBg ? this.props.drawerBg : 'white' }]}
           ref={(center) => this.center = center}
-          {...this._panGesture.panHandlers}>
+          {...this._panGesture.panHandlers}
+        >
           <TouchableWithoutFeedback
-            onPressIn={() => { this.setState({ touched: 'TRUE' }); }}
-            onPressOut={() => { this.setState({ touched: 'FALSE' }); }}>
+            onPressIn={() => {
+              console.log('touch in');
+              this.setState({ touched: 'TRUE' });
+            }}
+            onPressOut={() => {
+              this.setState({ touched: 'FALSE' });
+              console.log('touch out');
+            }}>
             {initDrawerView}
-
-
           </TouchableWithoutFeedback>
           {drawerView}
         </Animated.View>
 
-      </View>
+      </View >
     );
   }
 };
@@ -137,5 +169,3 @@ var styles = StyleSheet.create({
     right: 0,
   },
 });
-
-module.exports = component;
