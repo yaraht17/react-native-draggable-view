@@ -1,12 +1,12 @@
 {
   "name": "react-native-draggable-view",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "keywords": [
     "react-component",
     "react-native",
     "vertical draggable view",
     "ios","android",
-      "drag drop view", "drawer"
+      "drag drop view", "drawer", "bottom drawer"
   ],
   "description": "DraggableView component for React Native. Base from DraggableDrawer",
   "main": "index.js",
@@ -20,7 +20,7 @@
    "name": "Dao Hoang Tien",
    "email": "daohoangtien@gmail.com",
    "url": "https://github.com/yaraht17",
-   "website": "hoangtien.info"
+   "website": "twinger.co"
    }],
   "license": "MIT",
   "bugs": {
