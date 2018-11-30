@@ -43,4 +43,5 @@ $ npm i react-native-draggable-view --save
 | renderContainerView | undefined | `View` | Pass as parameter a renderable react component to show as container. |
 | renderDrawerView | undefined | `View` | Pass as parameter a renderable react component to show as drawer. |
 |renderInitDrawerView| undefined | `View` | Pass as parameter a renderable react component to show as view can draggable |
+|finalDrawerHeight| 0 | `number` | The height position that the drawer will stop starting from top. Example: `finalDrawerHeight={100}` will stop the drawer at 100 pixels from reaching the top. |
 
