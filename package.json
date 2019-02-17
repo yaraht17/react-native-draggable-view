@@ -1,32 +1,40 @@
 {
   "name": "react-native-draggable-view",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "keywords": [
     "react-component",
     "react-native",
     "vertical draggable view",
-    "ios","android",
-      "drag drop view", "drawer", "bottom drawer"
+    "ios",
+    "android",
+    "drag drop view",
+    "drawer",
+    "bottom drawer"
   ],
   "description": "DraggableView component for React Native. Base from DraggableDrawer",
   "main": "index.js",
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yaraht17/react-native-draggable-view.git"
   },
-   "author": "yaraht17 <daohoangtien.ptit@gmail.com>",
-   "contributors": [{
-   "name": "Dao Hoang Tien",
-   "email": "daohoangtien@gmail.com",
-   "url": "https://github.com/yaraht17",
-   "website": "twinger.co"
-   }],
+  "author": "yaraht17 <daohoangtien.ptit@gmail.com>",
+  "contributors": [
+    {
+      "name": "Dao Hoang Tien",
+      "email": "daohoangtien@gmail.com",
+      "url": "https://github.com/yaraht17",
+      "website": "twinger.co"
+    },
+    {
+      "name": "Mateo Guzmán",
+      "email": "mateo.guzmanalvarez@gmail.com",
+      "url": "https://github.com/mateoguzmana",
+      "website": "https://www.linkedin.com/in/mateoguzman/"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/yaraht17/react-native-draggable-view/issues"
   },
   "homepage": "https://github.com/yaraht17/react-native-draggable-view#readme"
-  
-   
 }
