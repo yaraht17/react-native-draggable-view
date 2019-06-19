@@ -1,6 +1,6 @@
 # react-native-draggable-view
 
-DraggableView is a component for react-native, it allows you have a vertical draggable view that you can drag up or drag down. So, if you drag and release that component, then it keeps moving until reach  either initial position or container border.  
+DraggableView is a component for react-native, it allows you have a vertical draggable view that you can drag up or drag down. So, if you drag and release that component, then it keeps moving until reach  either initial position or container border.
 
 ## Example
 ### [draggable-view-sample](https://github.com/yaraht17/react-native-draggable-view/tree/master/example/CartView)
@@ -17,6 +17,7 @@ $ npm i react-native-draggable-view --save
 ```javascript
     <Drawer
         initialDrawerSize={0.09}
+        autoDrawerUp={1} // 1 to auto up, 0 to auto down
         renderContainerView={() => (
             <Screen2 navigation={this.props.navigation} />
         )}
