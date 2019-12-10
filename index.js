@@ -25,7 +25,14 @@ class DraggableView extends Component {
             initialUsedSpace: initialUsedSpace
         };
     }
-
+    open() {
+        this.startAnimation(-100, 500, this.state.initialPositon, null, this.state.finalPosition);
+        this.props.onRelease && this.props.onRelease(true); // only add this line if you need to detect if the drawer is up or not
+     }
+     close() {
+        this.startAnimation(-90, 100, this.state.finalPosition, null, this.state.initialPositon);
+        this.props.onRelease && this.props.onRelease(true); // only add this line if you need to detect if the drawer is up or not
+     }
     isAValidMovement = (distanceX, distanceY) => {
         const moveTravelledFarEnough =
         Math.abs(distanceY) > Math.abs(distanceX) && Math.abs(distanceY) > 2;
