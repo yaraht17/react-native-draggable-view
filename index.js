@@ -16,7 +16,7 @@ class DraggableView extends Component {
         super(props);
         const initialUsedSpace = Math.abs(this.props.initialDrawerSize);
         const initialDrawerSize = SCREEN_HEIGHT * (1 - initialUsedSpace);
-        
+
         this.state = {
             touched: false,
             position: new Animated.Value(initialDrawerSize),
@@ -25,14 +25,31 @@ class DraggableView extends Component {
             initialUsedSpace: initialUsedSpace
         };
     }
+
+    componentWillReceiveProps(nextProps) {
+        const {
+         autoDrawerUp
+        } = this.props;
+
+        const autoDrawerUpSuccess = (autoDrawerUp !== nextProps.autoDrawerUp) && (nextProps.autoDrawerUp === 1);
+
+        if (autoDrawerUpSuccess) {
+          setTimeout(() => {
+            this.moveFinishedUpper();
+          }, 1000);
+        }
+    }
+
+
     open() {
         this.startAnimation(-100, 500, this.state.initialPositon, null, this.state.finalPosition);
         this.props.onRelease && this.props.onRelease(true); // only add this line if you need to detect if the drawer is up or not
-     }
-     close() {
+    }
+    close() {
         this.startAnimation(-90, 100, this.state.finalPosition, null, this.state.initialPositon);
         this.props.onRelease && this.props.onRelease(true); // only add this line if you need to detect if the drawer is up or not
-     }
+    }
+
     isAValidMovement = (distanceX, distanceY) => {
         const moveTravelledFarEnough =
         Math.abs(distanceY) > Math.abs(distanceX) && Math.abs(distanceY) > 2;
@@ -113,6 +130,12 @@ class DraggableView extends Component {
         );
         this.props.onRelease(isGoingToUp);
     }
+
+    moveFinishedUpper() {
+        if (!this.center) return;
+        this.startAnimation(-10, 0, this.state.initialPositon, 0, this.state.finalPosition);
+        this.props.onRelease && this.props.onRelease(true);
+      }
 
     render() {
         const containerView = this.props.renderContainerView();
