@@ -2944,6 +2944,10 @@ react-devtools-core@^2.1.8:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-draggable-view@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-draggable-view/-/react-native-draggable-view-0.0.2.tgz#6662cb6f26f91b5af163ebeb5ef3958135c6e761"
+
 react-native@0.45.0:
   version "0.45.0"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.45.0.tgz#1d686b905e4d439bb9c31eec67ef1c1355663ea0"
@@ -3812,8 +3816,8 @@ write-file-atomic@^1.2.0:
     slide "^1.1.5"
 
 ws@^1.1.0:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-1.1.4.tgz#57f40d036832e5f5055662a397c4de76ed66bf61"
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-1.1.5.tgz#cbd9e6e75e09fc5d2c90015f21f0c40875e0dd51"
   dependencies:
     options ">=0.0.5"
     ultron "1.0.x"
