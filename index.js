@@ -156,7 +156,7 @@ class DraggableView extends Component {
                         {
                             backgroundColor: this.props.drawerBg
                         },
-                        ...this.props.drawerStyle
+                        this.props.drawerStyle
                     ]}
                     ref={center => (this.center = center)}
                     {...this._panGesture.panHandlers}
