@@ -197,7 +197,7 @@ var styles = StyleSheet.create({
 
 DraggableView.propTypes = {
     drawerBg: PropTypes.string,
-    drawerStyle: PropTypes.shape,
+    drawerStyle: PropTypes.shape(),
     finalDrawerHeight: PropTypes.number,
     isInverseDirection: PropTypes.bool,
     onInitialPositionReached: PropTypes.func,
