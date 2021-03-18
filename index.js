@@ -155,7 +155,8 @@ class DraggableView extends Component {
                         styles.drawer,
                         {
                             backgroundColor: this.props.drawerBg
-                        }
+                        },
+                        this.props.drawerStyle
                     ]}
                     ref={center => (this.center = center)}
                     {...this._panGesture.panHandlers}
@@ -196,6 +197,7 @@ var styles = StyleSheet.create({
 
 DraggableView.propTypes = {
     drawerBg: PropTypes.string,
+    drawerStyle: PropTypes.shape(),
     finalDrawerHeight: PropTypes.number,
     isInverseDirection: PropTypes.bool,
     onInitialPositionReached: PropTypes.func,
@@ -207,6 +209,7 @@ DraggableView.propTypes = {
 
 DraggableView.defaultProps = {
     drawerBg: "white",
+    drawerStyle: undefined,
     finalDrawerHeight: 0,
     isInverseDirection: false,
     onInitialPositionReached: () => {},
